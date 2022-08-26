@@ -3,33 +3,45 @@
 const submitButton = document.getElementById("submit");
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("vscode");
-  localStorage.getItem();
+ /// console.log("vscode");
+  //localStorage.getItem();
+
+  axios.get("https://crudcrud.com/api/3d9abd23494248618e53804302322baa/studentData").
+  then((response)=>{
+    console.log(response);
+    for(var i=0;i<response.data.length;i++){
+      addNewLineElement(response.data[i]);
+    }
+
+  }).catch((err)=>{
+    console.log(err)
+
+  })
 });
 
-if (document.readyState !== "loading") {
-  console.log("vscode");
+// if (document.readyState !== "loading") {
+  
 
-  var keys = Object.keys(localStorage), //taking out all the keys that are there in the local storage
-    i = keys.length; //6
-  console.log("keys", keys);
-  let stringifiedDetailsOfPeople, detailsOfPeople;
+//   var keys = Object.keys(localStorage), //taking out all the keys that are there in the local storage
+//     i = keys.length; //6
+//   console.log("keys", keys);
+//   let stringifiedDetailsOfPeople, detailsOfPeople;
 
-  // 6 to 0
-  Object.keys(localStorage).forEach((key) => {
-    //i==2
-    if (key.match(/userDetails/g)) {
-      //we only care about keys that start with userDetails
-      //this is called regex matching
-      stringifiedDetailsOfPeople = localStorage.getItem(key);
-      console.log("stringifiedDetailsOfPeople", stringifiedDetailsOfPeople);
-      detailsOfPeople = JSON.parse(stringifiedDetailsOfPeople);
-      console.log("details", detailsOfPeople);
+//   // 6 to 0
+//   Object.keys(localStorage).forEach((key) => {
+//     //i==2
+//     if (key.match(/userDetails/g)) {
+//       //we only care about keys that start with userDetails
+//       //this is called regex matching
+//       stringifiedDetailsOfPeople = localStorage.getItem(key);
+//       console.log("stringifiedDetailsOfPeople", stringifiedDetailsOfPeople);
+//       detailsOfPeople = JSON.parse(stringifiedDetailsOfPeople);
+//       console.log("details", detailsOfPeople);
 
-      addNewLineElement(detailsOfPeople);
-    }
-  });
-}
+//       addNewLineElement(detailsOfPeople);
+//     }
+//   });
+// }
 // const listOfPeople = []
 submitButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -50,10 +62,14 @@ submitButton.addEventListener("click", (e) => {
       console.log(respone)})
      
     .catch((err)=>{console.log(err)})
-    document.body.innerHTML= document.body.innerHTML+"<h4>sonething went wrong</h4>"
+    //document.body.innerHTML= document.body.innerHTML+"<h4>sonething went wrong</h4>"
     //
   }
 });
+
+
+
+
 
 function addNewLineElement(object) {
   const ul = document.getElementById("listOfPeople");
